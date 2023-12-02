@@ -18,6 +18,96 @@ This project focuses on providing clean, scalable, and maintainable code while i
 -   **Swagger (Swashbuckle)**: For API documentation.
 -   **xUnit, Moq, FluentAssertions**: For unit and integration testing.
 
+## Project Structure
+
+    Backend.sln
+    │
+    ├── Backend.API
+    │   ├── Controllers/
+    │   │   └── ProductsController.cs
+    │   ├── Properties/
+    │   ├── appsettings.json
+    │   ├── Startup.cs
+    │   └── Program.cs
+    │
+    ├── Backend.Domain
+    │   ├── Entities/
+    │   │   └── Product.cs
+    │   ├── Enums/
+    │   ├── Interfaces/
+    │   │   └── IProductRepository.cs
+    │   ├── Exceptions/
+    │   │   └── ProductNotFoundException.cs
+    │   ├── Events/
+    │   │   ├── ProductCreatedEvent.cs
+    │   │   └── ProductUpdatedEvent.cs
+    │   └── ValueObjects/
+    │       └── ProductId.cs
+    │
+    ├── Backend.Infrastructure
+    │   ├── Data/
+    │   │   ├── Configurations/
+    │   │   │   └── ProductConfiguration.cs
+    │   │   ├── Migrations/
+    │   │   └── DbContext.cs
+    │   ├── Repositories/
+    │   │   └── ProductRepository.cs
+    │   └── Services/
+    │       └── ProductService.cs
+    │
+    ├── Backend.Application
+    │   ├── Commands/
+    │   │   ├── Interfaces/
+    │   │   │   ├── ICreateProductCommandHandler.cs
+    │   │   │   └── IUpdateProductCommandHandler.cs
+    │   │   ├── Handlers/
+    │   │   │   ├── CreateProductCommandHandler.cs
+    │   │   │   └── UpdateProductCommandHandler.cs
+    │   │   ├── CreateProductCommand.cs
+    │   │   └── UpdateProductCommand.cs
+    │   ├── Queries/
+    │   │   ├── Interfaces/
+    │   │   │   └── IGetProductQueryHandler.cs
+    │   │   │   └── IGetAllProductsQueryHandler.cs
+    │   │   ├── Handlers/
+    │   │   │   └── GetProductQueryHandler.cs
+    │   │   │   └── GetAllProductsQueryHandler.cs
+    │   │   └── GetAllProductsQuery.cs
+    │   │   └── GetProductQuery.cs
+    │   ├── DTOs/
+    │   │   └── ProductDto.cs
+    │   └── Validators/
+    │       ├── CreateProductValidator.cs
+    │       └── UpdateProductValidator.cs
+    │
+    ├── Backend.Common
+    │   ├── Exceptions/
+    │   │   └── ProductNotFoundException.cs
+    │   ├── Extensions/
+    │   │   └── CustomMiddlewareExtensions.cs
+    │   ├── Helpers/
+    │   │   └── ProductHelper.cs
+    │   └── Constants/
+    │       └── ProductConstants.cs
+    │
+    └── Backend.Tests
+        ├── UnitTests/
+        │   ├── Domain/
+        │   │   └── Entities/
+        │       │   └── ProductTests.cs
+        │   └── Application/
+        │       ├── Commands/
+        │       │   └── CreateProductCommandTests.cs
+        │       │   └── UpdateProductCommandTests.cs
+        │       └── Queries/
+        │           └── GetAllProductsQueryTests.cs
+        │           └── GetProductQueryTests.cs
+        ├── IntegrationTests/
+        │   └── API/
+        │       └── ProductsControllerTests.cs
+        └── TestHelpers/
+            └── MockProductData.cs
+
 ## Getting Started
 
 ### Prerequisites
