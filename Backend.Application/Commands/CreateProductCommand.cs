@@ -1,6 +1,3 @@
-﻿namespace Backend.Application.Commands
-{
-    internal class CreateProductCommand
-    {
-    }
-}
+﻿namespace Backend.Application.Commands;
+
+public record CreateProductCommand(string Name, decimal Price);
