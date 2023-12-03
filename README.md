@@ -32,6 +32,7 @@ This project focuses on providing clean, scalable, and maintainable code while i
     │
     ├── Backend.Domain
     │   ├── Entities/
+    │   │   └── BaseEntity.cs
     │   │   └── Product.cs
     │   ├── Enums/
     │   ├── Interfaces/
