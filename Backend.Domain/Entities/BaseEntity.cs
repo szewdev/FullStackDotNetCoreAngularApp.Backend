@@ -16,14 +16,21 @@ public abstract class BaseEntity
     public bool IsActive => !IsDeleted;
     public bool IsModified => UpdatedAt != null;
 
-    public void Delete()
+    protected virtual void Update()
     {
-        IsDeleted = true;
+        UpdatedAt = DateTimeOffset.Now;
     }
 
-    public void Restore()
+    protected void Delete()
+    {
+        IsDeleted = true;
+        UpdatedAt = DateTimeOffset.Now;
+    }
+
+    protected void Restore()
     {
         IsDeleted = false;
+        UpdatedAt = DateTimeOffset.Now;
     }
 
 }
