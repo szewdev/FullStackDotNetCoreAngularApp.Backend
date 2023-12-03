@@ -48,9 +48,10 @@ This project focuses on providing clean, scalable, and maintainable code while i
     ├── Backend.Infrastructure
     │   ├── Data/
     │   │   ├── Configurations/
+    │   │   │   └── BaseEntityConfiguration.cs
     │   │   │   └── ProductConfiguration.cs
     │   │   ├── Migrations/
-    │   │   └── DbContext.cs
+    │   │   └── AppDbContext.cs
     │   ├── Repositories/
     │   │   └── ProductRepository.cs
     │   └── Services/
@@ -59,21 +60,16 @@ This project focuses on providing clean, scalable, and maintainable code while i
     ├── Backend.Application
     │   ├── Commands/
     │   │   ├── Interfaces/
-    │   │   │   ├── ICreateProductCommandHandler.cs
-    │   │   │   └── IUpdateProductCommandHandler.cs
+    │   │   │   ├── IProductCommandHandler.cs
     │   │   ├── Handlers/
-    │   │   │   ├── CreateProductCommandHandler.cs
-    │   │   │   └── UpdateProductCommandHandler.cs
+    │   │   │   ├── ProductCommandHandler.cs
     │   │   ├── CreateProductCommand.cs
     │   │   └── UpdateProductCommand.cs
     │   ├── Queries/
     │   │   ├── Interfaces/
-    │   │   │   └── IGetProductQueryHandler.cs
-    │   │   │   └── IGetAllProductsQueryHandler.cs
+    │   │   │   └── IProductQueryHandler.cs
     │   │   ├── Handlers/
-    │   │   │   └── GetProductQueryHandler.cs
-    │   │   │   └── GetAllProductsQueryHandler.cs
-    │   │   └── GetAllProductsQuery.cs
+    │   │   │   └── ProductQueryHandler.cs
     │   │   └── GetProductQuery.cs
     │   ├── DTOs/
     │   │   └── ProductDto.cs
