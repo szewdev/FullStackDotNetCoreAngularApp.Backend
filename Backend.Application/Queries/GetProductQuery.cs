@@ -1,6 +1,3 @@
-﻿namespace Backend.Application.Queries
-{
-    internal class GetProductQuery
-    {
-    }
-}
+﻿namespace Backend.Application.Queries;
+
+public record GetProductQuery(int Id);
