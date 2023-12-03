@@ -1,6 +1,16 @@
-﻿namespace Backend.Infrastructure.Data.Configurations
+﻿using Backend.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Backend.Infrastructure.Data.Configurations;
+
+public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
-    internal class ProductConfiguration
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
+        BaseEntityConfiguration.ConfigureBaseEntity(builder);
+
+        builder.Property(b => b.Name).IsRequired().HasMaxLength(250);
+        builder.Property(b => b.Price).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
     }
 }

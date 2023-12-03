@@ -12,7 +12,7 @@ public abstract class BaseEntity
     public Guid UniqueId { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
     public DateTimeOffset? UpdatedAt { get; private set; }
-    public bool IsDeleted { get; private set; }
+    public bool IsDeleted { get; private set; } = false;
     public bool IsActive => !IsDeleted;
     public bool IsModified => UpdatedAt != null;
 
