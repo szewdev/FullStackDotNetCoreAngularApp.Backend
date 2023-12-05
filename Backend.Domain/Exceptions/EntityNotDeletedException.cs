@@ -1,5 +1,7 @@
-﻿namespace Backend.Domain.Exceptions;
+﻿using Backend.Common.Constants;
 
-public class EntityNotDeletedException(string message) : Exception(message)
+namespace Backend.Domain.Exceptions;
+
+public class EntityNotDeletedException(string message = ExceptionMessagesConstants.AlreadyActive) : DomainException(message)
 {
 }

@@ -1,8 +1,11 @@
 ﻿using Backend.Application.Commands;
 using Backend.Application.Commands.Interfaces;
 using Backend.Application.DTOs;
+using Backend.Application.Exceptions;
 using Backend.Application.Queries;
 using Backend.Application.Queries.Interfaces;
+using Backend.Common.Constants;
+using Backend.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -20,10 +23,21 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
     [SwaggerOperation(Summary = "Create new product")]
     public async Task<ActionResult> CreateProduct([FromBody] CreateProductCommand command)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var productId = await _commandHandler.Create(command);
-        return CreatedAtAction(nameof(GetProduct), new { id = productId }, command);
+            var productId = await _commandHandler.Create(command);
+            return CreatedAtAction(nameof(GetProduct), new { id = productId }, command);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ExceptionMessagesConstants.GeneralError);
+        }
     }
 
     // PUT api/products/{id}
@@ -31,10 +45,25 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
     [SwaggerOperation(Summary = "Update existing product")]
     public async Task<ActionResult> UpdateProduct(int id, [FromBody] UpdateProductCommand command)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        await _commandHandler.Update(command with { Id = id });
-        return NoContent();
+            await _commandHandler.Update(command with { Id = id });
+            return Ok();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ExceptionMessagesConstants.GeneralError);
+        }
     }
 
     // GET api/products/{id}
@@ -65,10 +94,25 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
     [SwaggerOperation(Summary = "Delete product by ID")]
     public async Task<ActionResult> DeleteProduct(int id)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        await _commandHandler.Delete(new DeleteProductCommand(id));
-        return NoContent();
+            await _commandHandler.Delete(new DeleteProductCommand(id));
+            return Ok();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ExceptionMessagesConstants.GeneralError);
+        }
     }
 
     // PATCH api/products/{id}
@@ -76,9 +120,24 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
     [SwaggerOperation(Summary = "Restore deleted product by ID")]
     public async Task<ActionResult> RestoreProduct(int id)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        try
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        await _commandHandler.Restore(new RestoreProductCommand(id));
-        return NoContent();
+            await _commandHandler.Restore(new RestoreProductCommand(id));
+            return Ok();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ExceptionMessagesConstants.GeneralError);
+        }
     }
 }

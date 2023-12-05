@@ -25,14 +25,14 @@ public abstract class BaseEntity
 
     public void Delete()
     {
-        if (IsDeleted) throw new EntityAlreadyDeletedException($"The entity with ID {Id} is already deleted.");
+        if (IsDeleted) throw new EntityAlreadyDeletedException($"The entity of type {GetType().Name} with ID {Id} is already deleted.");
         IsDeleted = true;
         UpdatedAt = DateTimeOffset.Now;
     }
 
     public void Restore()
     {
-        if (!IsDeleted) throw new EntityNotDeletedException($"The entity with ID {Id} is already active.");
+        if (!IsDeleted) throw new EntityNotDeletedException($"The entity of type {GetType().Name} with ID {Id} is already active.");
         IsDeleted = false;
         UpdatedAt = DateTimeOffset.Now;
     }

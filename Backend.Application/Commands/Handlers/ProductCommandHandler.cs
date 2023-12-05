@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Commands.Interfaces;
+using Backend.Application.Exceptions;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Data;
 
@@ -18,28 +19,32 @@ public class ProductCommandHandler(AppDbContext context) : IProductCommandHandle
 
     public async Task Update(UpdateProductCommand command)
     {
-        var product = await _context.Set<Product>().FindAsync(command.Id);
+        var product = await _context.Set<Product>().FindAsync(command.Id)
+            ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
         product?.Update(command.Name, command.Price);
         await _context.SaveChangesAsync();
     }
 
     public async Task Handle(UpdateProductCommand command)
     {
-        var product = await _context.Set<Product>().FindAsync(command.Id);
+        var product = await _context.Set<Product>().FindAsync(command.Id)
+            ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
         product?.Update(command.Name, command.Price);
         await _context.SaveChangesAsync();
     }
 
     public async Task Delete(DeleteProductCommand command)
     {
-        var product = await _context.Set<Product>().FindAsync(command.Id);
+        var product = await _context.Set<Product>().FindAsync(command.Id)
+            ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
         product?.Delete();
         await _context.SaveChangesAsync();
     }
 
     public async Task Restore(RestoreProductCommand command)
     {
-        var product = await _context.Set<Product>().FindAsync(command.Id);
+        var product = await _context.Set<Product>().FindAsync(command.Id)
+            ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
         product?.Restore();
         await _context.SaveChangesAsync();
     }
