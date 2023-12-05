@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Commands.Interfaces;
+using Backend.Application.Validators;
 using Backend.Common.Exceptions;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Data;
@@ -12,6 +13,8 @@ public class ProductCommandHandler(AppDbContext context) : IProductCommandHandle
     public async Task<int> Create(CreateProductCommand command)
     {
         var product = new Product(command.Name, command.Price);
+        var valid = DomainEntityValidator.Validate(product, out var errors);
+        if (!valid) throw new ValidationException(errors);
         _context.Add(product);
         await _context.SaveChangesAsync();
         return product.Id;
@@ -21,6 +24,8 @@ public class ProductCommandHandler(AppDbContext context) : IProductCommandHandle
     {
         var product = await _context.Set<Product>().FindAsync(command.Id)
             ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
+        var valid = DomainEntityValidator.Validate(product, out var errors);
+        if (!valid) throw new ValidationException(errors);
         product?.Update(command.Name, command.Price);
         await _context.SaveChangesAsync();
     }

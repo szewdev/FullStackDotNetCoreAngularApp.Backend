@@ -30,7 +30,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
             var productId = await _commandHandler.Create(command);
             return CreatedAtAction(nameof(GetProduct), new { id = productId }, command);
         }
-        catch (DomainException ex)
+        catch (Exception ex) when (ex is DomainException || ex is ValidationException)
         {
             return BadRequest(ex.Message);
         }

@@ -7,4 +7,3 @@ public interface IProductCommandHandler
     Task Delete(DeleteProductCommand command);
     Task Restore(RestoreProductCommand command);
 }
-
