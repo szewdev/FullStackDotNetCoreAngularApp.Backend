@@ -1,4 +1,6 @@
-﻿namespace Backend.Domain.Entities;
+﻿using Backend.Domain.Exceptions;
+
+namespace Backend.Domain.Entities;
 
 public abstract class BaseEntity
 {
@@ -21,14 +23,16 @@ public abstract class BaseEntity
         UpdatedAt = DateTimeOffset.Now;
     }
 
-    protected void Delete()
+    public void Delete()
     {
+        if (IsDeleted) throw new EntityAlreadyDeletedException($"The entity with ID {Id} is already deleted.");
         IsDeleted = true;
         UpdatedAt = DateTimeOffset.Now;
     }
 
-    protected void Restore()
+    public void Restore()
     {
+        if (!IsDeleted) throw new EntityNotDeletedException($"The entity with ID {Id} is already active.");
         IsDeleted = false;
         UpdatedAt = DateTimeOffset.Now;
     }
