@@ -38,7 +38,9 @@ This project focuses on providing clean, scalable, and maintainable code while i
     │   ├── Interfaces/
     │   │   └── IProductRepository.cs
     │   ├── Exceptions/
-    │   │   └── ProductNotFoundException.cs
+    │   │   └── DomainException.cs
+    │   │   └── EntityAlreadyDeletedException.cs
+    │   │   └── EntityNotDeletedException.cs
     │   ├── Events/
     │   │   ├── ProductCreatedEvent.cs
     │   │   └── ProductUpdatedEvent.cs
@@ -79,12 +81,13 @@ This project focuses on providing clean, scalable, and maintainable code while i
     │
     ├── Backend.Common
     │   ├── Exceptions/
-    │   │   └── ProductNotFoundException.cs
+    │   │   └── NotFoundException.cs
     │   ├── Extensions/
     │   │   └── CustomMiddlewareExtensions.cs
     │   ├── Helpers/
     │   │   └── ProductHelper.cs
     │   └── Constants/
+    │       └── ExceptionMessagesConstants.cs
     │       └── ProductConstants.cs
     │
     └── Backend.Tests
