@@ -76,11 +76,13 @@ This project focuses on providing clean, scalable, and maintainable code while i
     │   ├── DTOs/
     │   │   └── ProductDto.cs
     │   └── Validators/
+    │       ├── DomainEntityValidator.cs
     │       ├── CreateProductValidator.cs
     │       └── UpdateProductValidator.cs
     │
     ├── Backend.Common
     │   ├── Exceptions/
+    │   │   └── ValidationException.cs
     │   │   └── NotFoundException.cs
     │   ├── Extensions/
     │   │   └── CustomMiddlewareExtensions.cs
