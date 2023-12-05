@@ -1,10 +1,10 @@
 ﻿using Backend.Application.Commands;
 using Backend.Application.Commands.Interfaces;
 using Backend.Application.DTOs;
-using Backend.Application.Exceptions;
 using Backend.Application.Queries;
 using Backend.Application.Queries.Interfaces;
 using Backend.Common.Constants;
+using Backend.Common.Exceptions;
 using Backend.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Commands.Interfaces;
-using Backend.Application.Exceptions;
+using Backend.Common.Exceptions;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Data;
 

@@ -1,6 +1,6 @@
 ﻿using Backend.Common.Constants;
 
-namespace Backend.Application.Exceptions;
+namespace Backend.Common.Exceptions;
 
 public class NotFoundException(string message = ExceptionMessagesConstants.NotFound) : Exception(message)
 {
