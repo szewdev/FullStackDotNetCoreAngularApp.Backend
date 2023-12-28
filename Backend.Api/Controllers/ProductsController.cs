@@ -20,14 +20,14 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // POST api/products
     [HttpPost]
-    [SwaggerOperation(Summary = "Create new product")]
+    [SwaggerOperation(Summary = "Handle new product")]
     public async Task<ActionResult> CreateProduct([FromBody] CreateProductCommand command)
     {
         try
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var productId = await _commandHandler.Create(command);
+            var productId = await _commandHandler.Handle(command);
             return CreatedAtAction(nameof(GetProduct), new { id = productId }, command);
         }
         catch (Exception ex) when (ex is DomainException || ex is ValidationException)
@@ -42,14 +42,14 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // PUT api/products/{id}
     [HttpPut("{id}")]
-    [SwaggerOperation(Summary = "Update existing product")]
+    [SwaggerOperation(Summary = "Handle existing product")]
     public async Task<ActionResult> UpdateProduct(int id, [FromBody] UpdateProductCommand command)
     {
         try
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _commandHandler.Update(command with { Id = id });
+            await _commandHandler.Handle(command with { Id = id });
             return Ok();
         }
         catch (NotFoundException ex)
@@ -91,14 +91,14 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // DELETE api/products/{id}
     [HttpDelete("{id}")]
-    [SwaggerOperation(Summary = "Delete product by ID")]
+    [SwaggerOperation(Summary = "Handle product by ID")]
     public async Task<ActionResult> DeleteProduct(int id)
     {
         try
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _commandHandler.Delete(new DeleteProductCommand(id));
+            await _commandHandler.Handle(new DeleteProductCommand(id));
             return Ok();
         }
         catch (NotFoundException ex)
@@ -117,14 +117,14 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // PATCH api/products/{id}
     [HttpPatch("{id}")]
-    [SwaggerOperation(Summary = "Restore deleted product by ID")]
+    [SwaggerOperation(Summary = "Handle deleted product by ID")]
     public async Task<ActionResult> RestoreProduct(int id)
     {
         try
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _commandHandler.Restore(new RestoreProductCommand(id));
+            await _commandHandler.Handle(new RestoreProductCommand(id));
             return Ok();
         }
         catch (NotFoundException ex)

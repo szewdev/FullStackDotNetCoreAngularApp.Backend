@@ -10,7 +10,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
 {
     private readonly IProductRepository _repository = repository;
 
-    public async Task<int> Create(CreateProductCommand command)
+    public async Task<int> Handle(CreateProductCommand command)
     {
         var product = new Product(command.Name, command.Price);
         var valid = DomainEntityValidator.Validate(product, out var errors);
@@ -20,7 +20,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
         return product.Id;
     }
 
-    public async Task Update(UpdateProductCommand command)
+    public async Task Handle(UpdateProductCommand command)
     {
         var product = await _repository.GetProductByIdAsync(command.Id)
             ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
@@ -31,7 +31,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
         await _repository.SaveChangesAsync();
     }
 
-    public async Task Delete(DeleteProductCommand command)
+    public async Task Handle(DeleteProductCommand command)
     {
         var product = await _repository.GetProductByIdAsync(command.Id)
             ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
@@ -39,7 +39,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
         await _repository.SaveChangesAsync();
     }
 
-    public async Task Restore(RestoreProductCommand command)
+    public async Task Handle(RestoreProductCommand command)
     {
         var product = await _repository.GetProductByIdAsync(command.Id)
             ?? throw new NotFoundException($"Product with ID {command.Id} not found.");

@@ -2,8 +2,8 @@
 
 public interface IProductCommandHandler
 {
-    Task<int> Create(CreateProductCommand command);
-    Task Update(UpdateProductCommand command);
-    Task Delete(DeleteProductCommand command);
-    Task Restore(RestoreProductCommand command);
+    Task<int> Handle(CreateProductCommand command);
+    Task Handle(UpdateProductCommand command);
+    Task Handle(DeleteProductCommand command);
+    Task Handle(RestoreProductCommand command);
 }
