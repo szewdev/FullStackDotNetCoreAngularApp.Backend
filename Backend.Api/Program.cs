@@ -9,6 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(policyBuilder =>
+    policyBuilder.AddDefaultPolicy(policy =>
+        policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader())
+);
+
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -24,6 +29,7 @@ builder.Services.AddSwaggerGen(opts => opts.EnableAnnotations());
 
 var app = builder.Build();
 
+app.UseCors();
 app.UseRouting();
 app.UseEndpoints(endpoints => { _ = endpoints.MapControllers(); });
 
