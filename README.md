@@ -128,7 +128,7 @@ This project focuses on providing clean, scalable, and maintainable code while i
 ### Running
 
 1.  Start the Backend.API project.
-2.  The application should be available at the default address: `http://localhost:5000/`.
+2.  The application should be available at the default address: `http://localhost:5093/`.
 
 ## Contributing
 
