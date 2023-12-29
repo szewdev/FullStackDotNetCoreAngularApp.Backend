@@ -12,7 +12,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
 
     public async Task<int> Handle(CreateProductCommand command)
     {
-        var product = new Product(command.Name, command.Price);
+        var product = new Product(command.Name, command.Price, command.Description);
         var valid = DomainEntityValidator.Validate(product, out var errors);
         if (!valid) throw new ValidationException(errors);
         await _repository.AddProductAsync(product);
@@ -26,7 +26,7 @@ public class ProductCommandHandler(IProductRepository repository) : IProductComm
             ?? throw new NotFoundException($"Product with ID {command.Id} not found.");
         var valid = DomainEntityValidator.Validate(product, out var errors);
         if (!valid) throw new ValidationException(errors);
-        product.Update(command.Name, command.Price);
+        product.Update(command.Name, command.Price, command.Description);
         _repository.UpdateProduct(product);
         await _repository.SaveChangesAsync();
     }

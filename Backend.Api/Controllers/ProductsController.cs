@@ -20,7 +20,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // POST api/products
     [HttpPost]
-    [SwaggerOperation(Summary = "Handle new product")]
+    [SwaggerOperation(Summary = "Add new product")]
     public async Task<ActionResult> CreateProduct([FromBody] CreateProductCommand command)
     {
         try
@@ -42,7 +42,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // PUT api/products/{id}
     [HttpPut("{id}")]
-    [SwaggerOperation(Summary = "Handle existing product")]
+    [SwaggerOperation(Summary = "Update existing product")]
     public async Task<ActionResult> UpdateProduct(int id, [FromBody] UpdateProductCommand command)
     {
         try
@@ -91,7 +91,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // DELETE api/products/{id}
     [HttpDelete("{id}")]
-    [SwaggerOperation(Summary = "Handle product by ID")]
+    [SwaggerOperation(Summary = "Mark product as deleted by ID")]
     public async Task<ActionResult> DeleteProduct(int id)
     {
         try
@@ -117,7 +117,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
 
     // PATCH api/products/{id}
     [HttpPatch("{id}")]
-    [SwaggerOperation(Summary = "Handle deleted product by ID")]
+    [SwaggerOperation(Summary = "Restore deleted product by ID")]
     public async Task<ActionResult> RestoreProduct(int id)
     {
         try

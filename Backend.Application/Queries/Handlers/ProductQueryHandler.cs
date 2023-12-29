@@ -11,12 +11,12 @@ public class ProductQueryHandler(IProductRepository context) : IProductQueryHand
     public async Task<ProductDto?> Handle(GetProductQuery query)
     {
         var p = await _repository.GetProductByIdAsync(query.Id);
-        return p != null ? new ProductDto(p.Id, p.Name, p.Price) : null;
+        return p != null ? new ProductDto(p.Id, p.Name, p.Price, p.Description) : null;
     }
 
     public async Task<List<ProductDto>> Handle()
     {
         var products = await _repository.GetAllProducts();
-        return products.Select(x => new ProductDto(x.Id, x.Name, x.Price)).ToList();
+        return products.Select(x => new ProductDto(x.Id, x.Name, x.Price, x.Description)).ToList();
     }
 }

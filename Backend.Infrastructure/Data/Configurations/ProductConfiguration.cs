@@ -10,7 +10,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         BaseEntityConfiguration.ConfigureBaseEntity(builder);
 
-        builder.Property(b => b.Name).IsRequired().HasMaxLength(250);
+        builder.Property(b => b.Name).IsRequired().HasMaxLength(75);
         builder.Property(b => b.Price).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
+        builder.Property(b => b.Description).HasMaxLength(255);
     }
 }
