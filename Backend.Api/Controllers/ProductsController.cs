@@ -28,7 +28,7 @@ public class ProductsController(IProductCommandHandler commandHandler, IProductQ
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var productId = await _commandHandler.Handle(command);
-            return CreatedAtAction(nameof(GetProduct), new { id = productId }, command);
+            return CreatedAtAction(nameof(GetProduct), new { id = productId }, command with { Id = productId});
         }
         catch (Exception ex) when (ex is DomainException || ex is ValidationException)
         {
