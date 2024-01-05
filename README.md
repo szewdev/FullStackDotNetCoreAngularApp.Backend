@@ -138,3 +138,7 @@ Feel free to report bugs, propose new features, or submit fixes.
 ## License
 
 This project is licensed under the MIT License.
+
+## Screenshots
+
+![swagger](https://raw.githubusercontent.com/szewdev/FullStackDotNetCoreAngularApp.Backend/master/readme/swagger.jpg)
