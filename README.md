@@ -123,7 +123,7 @@ This project focuses on providing clean, scalable, and maintainable code while i
 1.  Clone the repository to your local environment.
 2.  Open Backend.sln in your chosen IDE.
 3.  Update the `appsettings.json` file in the Backend.API project to suit your environment.
-4.  Run the database migrations using `dotnet ef database update`.
+4.  Run the database migrations using `dotnet ef database update --project Backend.Infrastructure --startup-project Backend.Api`.
 
 ### Running
 
